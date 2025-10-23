@@ -114,11 +114,13 @@ body {
   inset: 0;
   width: 100%;
   height: auto;
-  z-index: 1000;
-  display:none;
-  pointer-events: none;
+  z-index: -1;
   display: flex;
   justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s 0.3s, opacity 0.3s ease;
 }
 .nav-overlay::before {
   content: "";
@@ -129,9 +131,11 @@ body {
 }
 
 .nav-overlay.active {
-  display: flex;
   z-index: 2000;
   pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 0s, opacity 0.3s ease;
 }
 
 .nav-overlay * {
@@ -416,7 +420,6 @@ background: rgba(0, 0, 0, 0.25);
   box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
 }
 
-/* CTA button */
 .cta-btn {
   background: #0064fd;
   color: #fff;
@@ -457,6 +460,156 @@ background: rgba(0, 0, 0, 0.25);
   object-position: right center;
   transform: none;
 }
+
+.introduction-container {
+  padding: 32px 20px; 
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px; 
+  margin: 0 auto; 
+  box-sizing: border-box;
+}
+.introduction-text-container{
+  text-align: left;
+  display: block;
+  flex: 0 0 auto;
+  width: 58.3333%;
+}
+.introduction-heading p{
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  margin-top: 0px;
+  font-size: 1rem;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+.introduction-heading h2{
+  font-size: 2.25rem;
+  line-height: 1.333;
+  margin: 0 0 12px 0;
+  color: #0b243b;
+}
+.introduction-paragraph p{
+  font-size: 1.12rem;
+  line-height: 1.4;
+  margin: 0 0 18px 0;
+  color: #334155;
+}
+.intro-carousel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+  position: relative;
+}
+
+.carousel-container {
+  display: flex;
+  max-width: 1100px;
+  width: 100%;
+  gap: 2rem;
+}
+
+.carousel-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-right: 1.5rem;
+  /* max-width: 33.33% ; */
+}
+
+.carousel-btn {
+  margin-bottom: 0.5rem;
+  padding: 0 1rem;
+  padding-bottom: 0.5rem;
+  background: #fff;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.carousel-btn p{
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4rem;
+}
+
+.carousel-btn h4{
+  padding: 0.5rem 0;
+  padding-top: 1rem;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.carousel-btn.active {
+  box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.1);
+  background: #fdfeff;
+  border-left: #0052CC 15px solid;
+}
+
+.carousel-right {
+  flex: 2;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  padding-top: 0; /* remove extra space for dots */
+}
+
+.carousel-slider {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+  cursor: grab;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  border-radius: 12px;
+  user-select: none;
+  height: auto;
+  object-fit: contain;
+}
+
+.carousel-dots {
+  margin-left: 63rem;
+  position: static;
+  display: flex;
+  gap: 10px;
+  z-index: 20;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 18px; 
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: width 0.32s cubic-bezier(.2,.9,.2,1), 
+              background 0.2s ease, 
+              border-radius 0.32s cubic-bezier(.2,.9,.2,1);
+  vertical-align: middle;
+}
+
+.dot.active {
+  width: 48px;            
+  height: 10px;           
+  background: #0079bf;   
+  border-radius: 999px;   
+}
+
 
 /* Adjust responsive behavior */
 @media (max-width: 700px) {
