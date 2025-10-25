@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     dot.addEventListener("click", () => updateIntroSlide(i))
   );
 
-  // Review carousel — translate the wrapper instead of individual slides
   const reviewWrapper = document.querySelector(".review-wrapper");
   const reviewSlides = document.querySelectorAll(".review-slide");
   const reviewDots = document.querySelectorAll(".review-controls .dot");
@@ -75,25 +74,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const prevBtn = document.querySelector(".review-controls .prev-btn");
   let reviewIndex = 0;
 
-  // Guards: ensure required elements exist
   if (!reviewWrapper || reviewSlides.length === 0) {
-    // No-op or initialize with defaults
   } else {
     const reviewCount = reviewSlides.length;
 
     function setWrapperPosition(index) {
-      // clamp/wrap index
       reviewIndex = ((index % reviewCount) + reviewCount) % reviewCount;
       reviewWrapper.style.transform = `translateX(-${reviewIndex * 100}%)`;
-      // update active classes on slides and dots
+      
       reviewSlides.forEach((s, i) => s.classList.toggle("active", i === reviewIndex));
       reviewDots.forEach((d, i) => d.classList.toggle("active", i === reviewIndex));
     }
 
-    // Initialize to first slide
     setWrapperPosition(0);
 
-    // Event wiring with guards
     nextBtn && nextBtn.addEventListener("click", () => setWrapperPosition(reviewIndex + 1));
     prevBtn && prevBtn.addEventListener("click", () => setWrapperPosition(reviewIndex - 1));
     if (reviewDots && reviewDots.length) {

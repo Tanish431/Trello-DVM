@@ -859,6 +859,7 @@ background: rgba(0, 0, 0, 0.25);
 }
 
 .review-wrapper {
+  margin: 0 2.5rem;
   display: flex;
   position: relative;
   transition: transform 0.6s ease; 
@@ -870,9 +871,15 @@ background: rgba(0, 0, 0, 0.25);
   min-width: 100%;
   display: flex;
   background: #fefefe;
+  border: 1px solid #e1e1e1;
+  min-height: 25rem;
   border-radius: 10px;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-  transition: opacity 0.3s ease;
+  transition: opacity 0.1s ease;
+  opacity: 0;
+}
+.review-slide.active {
+  opacity: 1;
 }
 
 .review-left {
@@ -896,7 +903,7 @@ background: rgba(0, 0, 0, 0.25);
 }
 
 .review-text {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #172b4d;
   margin-bottom: 2rem;
 }
@@ -905,11 +912,37 @@ background: rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+}
+
+.author-info::before{
+  display: block;
+  background-color: #898484;
+  content: "";
+  height: 1px;
+  margin-bottom: 1.2rem;
+  max-width: 9rem;
+}
+
+.author-info{
+  font-weight: 100;
+  font-size: 0.9rem;
+  line-height: 0.4;
+}
+
+.author-cred {
+  display: flex;
+  align-items: flex-start;
+  justify-content: inherit;
+  gap: 0.5rem;
+  margin-top: -3rem;
 }
 
 .review-logo {
-  width: 120px;
+  width: 80px;
+  height: auto;
+}
+#thoughtworks-logo {
+  width: 180px;
   height: auto;
 }
 
@@ -922,7 +955,7 @@ background: rgba(0, 0, 0, 0.25);
 
 .review-stat {
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   line-height: 1.5;
 }
 
@@ -936,10 +969,11 @@ background: rgba(0, 0, 0, 0.25);
 .review-controls {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   margin-top: 1.5rem;
   gap: 1rem;
   margin-bottom: 1rem;
+  margin-right: 2.5rem;
 }
 
 .review-controls button {
@@ -954,11 +988,10 @@ background: rgba(0, 0, 0, 0.25);
 }
 
 .review-controls button:hover {
-  background: #dfe1e6;
+  color: #0064fd;
 }
 
 .dots {
-  margin-left: 70%;
   display: flex;
   gap: 8px;
 }
@@ -975,3 +1008,61 @@ background: rgba(0, 0, 0, 0.25);
 .dot.active {
   background: #0052cc;
 }
+
+.customers {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding-bottom: 4rem;
+}
+
+.cutomers-wrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.customers-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.customer-continer-text {
+  max-width: 1100px;
+  font-size: 1.2rem;
+}
+
+.get-started-content{
+  background: #f4f5f7;
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.get-started-content h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #0b243b;
+}
+
+.get-started-form input[type="email"] {
+  margin-right: 0.8rem;
+  margin-bottom: 1rem;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  flex: 1 1 auto;
+  width: 18rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4);
+}
+.get-started-form input[type="email"]:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
+}
+
