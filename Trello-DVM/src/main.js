@@ -1,45 +1,41 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   const navLinks = {
-    features: document.getElementById('features-btn'),
-    solutions: document.getElementById('solutions-btn'),
-    plans: document.getElementById('plans-btn'),
-    resources: document.getElementById('resources-btn'),
+    features: document.getElementById("features-btn"),
+    solutions: document.getElementById("solutions-btn"),
+    plans: document.getElementById("plans-btn"),
+    resources: document.getElementById("resources-btn"),
   };
 
   const overlays = {
-    features: document.getElementById('features-overlay'),
-    solutions: document.getElementById('solutions-overlay'),
-    plans: document.getElementById('plans-overlay'),
-    resources: document.getElementById('resources-overlay'),
+    features: document.getElementById("features-overlay"),
+    solutions: document.getElementById("solutions-overlay"),
+    plans: document.getElementById("plans-overlay"),
+    resources: document.getElementById("resources-overlay"),
   };
 
-  // Handle nav link clicks
   Object.entries(navLinks).forEach(([key, link]) => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault(); 
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
       e.stopPropagation();
-      
+
       const overlay = overlays[key];
-      const isActive = overlay.classList.contains('active');
-      
-      // Close all overlays first and then toggle the clicked one
-      Object.values(overlays).forEach(o => o.classList.remove('active'));
+      const isActive = overlay.classList.contains("active");
+
+      Object.values(overlays).forEach((o) => o.classList.remove("active"));
       if (!isActive) {
-        overlay.classList.add('active');
+        overlay.classList.add("active");
       }
     });
   });
-  // Prevent overlay content clicks from closing the overlay
-  document.querySelectorAll('.overlay-content').forEach(content => {
-    content.addEventListener('click', (e) => {
+  document.querySelectorAll(".overlay-content").forEach((content) => {
+    content.addEventListener("click", (e) => {
       e.stopPropagation();
     });
   });
 
-  // Close overlay when clicking anywhere
-  document.addEventListener('click', () => {
-    Object.values(overlays).forEach(overlay => {
-      overlay.classList.remove('active');
+  document.addEventListener("click", () => {
+    Object.values(overlays).forEach((overlay) => {
+      overlay.classList.remove("active");
     });
   });
 
@@ -81,18 +77,100 @@ document.addEventListener('DOMContentLoaded', () => {
     function setWrapperPosition(index) {
       reviewIndex = ((index % reviewCount) + reviewCount) % reviewCount;
       reviewWrapper.style.transform = `translateX(-${reviewIndex * 100}%)`;
-      
-      reviewSlides.forEach((s, i) => s.classList.toggle("active", i === reviewIndex));
-      reviewDots.forEach((d, i) => d.classList.toggle("active", i === reviewIndex));
+
+      reviewSlides.forEach((s, i) =>
+        s.classList.toggle("active", i === reviewIndex)
+      );
+      reviewDots.forEach((d, i) =>
+        d.classList.toggle("active", i === reviewIndex)
+      );
     }
 
     setWrapperPosition(0);
 
-    nextBtn && nextBtn.addEventListener("click", () => setWrapperPosition(reviewIndex + 1));
-    prevBtn && prevBtn.addEventListener("click", () => setWrapperPosition(reviewIndex - 1));
+    nextBtn &&
+      nextBtn.addEventListener("click", () =>
+        setWrapperPosition(reviewIndex + 1)
+      );
+    prevBtn &&
+      prevBtn.addEventListener("click", () =>
+        setWrapperPosition(reviewIndex - 1)
+      );
     if (reviewDots && reviewDots.length) {
-      reviewDots.forEach((dot, i) => dot.addEventListener("click", () => setWrapperPosition(i)));
+      reviewDots.forEach((dot, i) =>
+        dot.addEventListener("click", () => setWrapperPosition(i))
+      );
     }
   }
+});
 
+document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("menuBtn");
+  const backBtn = document.getElementById("backBtn");
+  const menu = document.getElementById("menu");
+  const featuresBtn = document.getElementById("featuresBtn");
+  const solutionsBtn = document.getElementById("solutionsBtn");
+  const plansBtn = document.getElementById("plansBtn");
+  const resourcesBtn = document.getElementById("resourcesBtn")
+  const featuresMenu = document.getElementById("featuresMenu");
+  const solutionsMenu = document.getElementById("solutionsMenu");
+  const resourcesMenu = document.getElementById("resourcesMenu");
+  const plansMenu = document.getElementById("plansMenu");
+  const logo = document.getElementById("logo");
+
+  if (!menuBtn || !menu) return; // guard for desktop
+
+  // --- MENU BUTTON LOGIC ---
+  menuBtn.addEventListener("click", () => {
+    document.body.style.overflow = "hidden";
+    if (menuBtn.textContent === "✕") {
+      closeAllMenus();
+      return;
+    }
+
+    // open main menu
+    menu.classList.add("active");
+    menuBtn.textContent = "✕";
+  });
+
+  const buttonMenuPairs = [
+  [featuresBtn, featuresMenu],
+  [solutionsBtn, solutionsMenu],
+  [plansBtn, plansMenu],
+  [resourcesBtn, resourcesMenu],
+];
+
+buttonMenuPairs.forEach(([btn, menuEl]) => {
+  btn.addEventListener("click", () => {
+    menu.classList.remove("active");
+    menuEl.classList.add("active");
+    logo.style.opacity = "0";
+    backBtn.style.display = "block";
+  });
+});
+
+  // --- BACK BUTTON ---
+  backBtn.addEventListener("click", () => {
+    featuresMenu.classList.remove("active");
+    solutionsMenu.classList.remove("active");
+    plansMenu.classList.remove("active");
+    resourcesMenu.classList.remove("active")
+    menu.classList.add("active");
+    logo.style.opacity = "1";
+    backBtn.style.display = "none";
+    document.body.style.overflow = "";
+  });
+
+  // --- CLOSE ALL MENUS FUNCTION ---
+  function closeAllMenus() {
+    menu.classList.remove("active");
+    featuresMenu.classList.remove("active");
+    solutionsMenu.classList.remove("active");
+    plansMenu.classList.remove("active");
+    resourcesMenu.classList.remove("active");
+    document.body.style.overflow = "";
+    backBtn.style.display = "none";
+    logo.style.opacity = "1";
+    menuBtn.textContent = "☰";
+  }
 });
