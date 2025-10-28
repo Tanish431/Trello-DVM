@@ -123,6 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- MENU BUTTON LOGIC ---
   menuBtn.addEventListener("click", () => {
     document.body.style.overflow = "hidden";
+    menu.style.visibility = "visible";
     if (menuBtn.textContent === "✕") {
       closeAllMenus();
       return;
@@ -146,28 +147,28 @@ buttonMenuPairs.forEach(([btn, menuEl]) => {
     menuEl.classList.add("active");
     logo.style.opacity = "0";
     backBtn.style.display = "block";
+    menuEl.style.visibility = "visible";
   });
 });
 
-  // --- BACK BUTTON ---
   backBtn.addEventListener("click", () => {
-    featuresMenu.classList.remove("active");
-    solutionsMenu.classList.remove("active");
-    plansMenu.classList.remove("active");
-    resourcesMenu.classList.remove("active")
+    buttonMenuPairs.forEach(([btn, menuEl])=>{
+      menuEl.classList.remove("active");
+      menuEl.style.visibility = "hidden";
+    })
     menu.classList.add("active");
     logo.style.opacity = "1";
     backBtn.style.display = "none";
     document.body.style.overflow = "";
+
   });
 
-  // --- CLOSE ALL MENUS FUNCTION ---
   function closeAllMenus() {
     menu.classList.remove("active");
-    featuresMenu.classList.remove("active");
-    solutionsMenu.classList.remove("active");
-    plansMenu.classList.remove("active");
-    resourcesMenu.classList.remove("active");
+    buttonMenuPairs.forEach(([btn, menuEl])=>{
+      menuEl.classList.remove("active");
+      menuEl.style.visibility = "hidden";
+    })
     document.body.style.overflow = "";
     backBtn.style.display = "none";
     logo.style.opacity = "1";
